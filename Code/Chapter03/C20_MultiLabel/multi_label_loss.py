@@ -6,7 +6,10 @@ import numpy as np
 # Sigmoid损失
 def Sigmoid_loss(y_true, y_pred):
     loss = nn.MultiLabelSoftMarginLoss(reduction='mean')
+    l = -(y_true * torch.log(1 / (1 + torch.exp(-y_pred))) + (1 - y_true) * torch.log(
+        torch.exp(-y_pred) / (1 + torch.exp(-y_pred)))).mean()
     print(loss(y_pred, y_true))  # 0.5927
+    print(l)  # 0.5927
 
 
 def prediction(logits, K):
