@@ -13,7 +13,8 @@ def Sigmoid_loss(y_true, y_pred):
 
 
 def prediction(logits, K):
-    y_pred = np.argsort(-logits, axis=-1)[:, :K]
+    y_pred = np.argsort(-logits.numpy(), axis=-1)[:, :K]
+    # np.argsort默认是从小到大。如果要取最大Top-K 一种方法就是加个负号，那么返回的索引就是按从大到小的顺序
     print("预测标签：", y_pred)
     p = np.vstack([logits[r, c] for r, c in enumerate(y_pred)])
     print("预测概率：", p)
