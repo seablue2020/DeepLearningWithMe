@@ -72,5 +72,13 @@ if __name__ == '__main__':
     config = ModelConfig()
     config.__dict__['num_sens'] = 4
     config.__dict__['with_max_prob'] = False
-    srcs = ["李白乘舟将欲行", "朝辞"]
+    srcs = ["李白乘舟将欲行", "朝辞白帝彩"]
     inference(config, srcs)
+
+"""
+李白乘舟将欲行，忽闻白鸟逐双旌。
+江边老去黄河水，夜夜无过渌水声。
+
+朝辞白帝彩云间，万仞山阴独未还。
+燕子入时寒食好，玉杯销尽百年心。
+"""
