@@ -11,6 +11,11 @@ import torch
 import torch.nn as nn
 import matplotlib.pyplot as plt
 
+# 配置 matplotlib 使用已安装的中文字体
+plt.rcParams['font.family'] = 'sans-serif'
+plt.rcParams['font.sans-serif'] = ['WenQuanYi Zen Hei', 'Noto Sans CJK SC', 'SimHei', 'DejaVu Sans']
+plt.rcParams['axes.unicode_minus'] = False  # 正确显示负号
+
 
 def make_house_data():
     """
@@ -32,11 +37,20 @@ def visualization(x, y, y_pred=None):
     plt.xlabel('面积', fontsize=15)
     plt.ylabel('房价', fontsize=15)
     plt.scatter(x, y, c='black')
-    # plt.rcParams['font.sans-serif'] = ['SimHei'] # 指定默认字体
     plt.plot(x, y_pred)
-    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
     plt.tight_layout()  # 调整子图间距
-    plt.show()
+    
+    # 在 dev container 等 headless 环境中保存图片而不是显示窗口
+    import os
+    output_path = 'house_price_visualization.png'
+    plt.savefig(output_path, dpi=150, bbox_inches='tight')
+    print(f"图表已保存到: {os.path.abspath(output_path)}")
+    
+    # 如果有 GUI 环境，也尝试显示（在 headless 环境中会被忽略）
+    try:
+        plt.show()
+    except Exception:
+        pass
 
 
 def train(x, y):
