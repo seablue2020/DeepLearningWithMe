@@ -11,6 +11,9 @@ import numpy as np
 
 
 def crossEntropy(y_true, logits):
+    # y_true: one-hot编码 [m,n]
+    # logits: 经过softmax后的概率分布 [m,n]
+    # m是样本个数，n是类别个数
     loss = y_true * np.log(logits)  # [m,n]
     return -np.sum(loss) / len(y_true)
 
@@ -24,6 +27,7 @@ if __name__ == '__main__':
     logits = torch.tensor([[0.5, 0.3, 0.6], [0.5, 0.4, 0.3]])
     y = torch.LongTensor([2, 0])
     loss = nn.CrossEntropyLoss(reduction='mean')  # 返回的均值是除以的每一批样本的个数（不一定是batch_size）
+    # 如果reduction = 'sum'，则返回的值是所有样本的loss之和
     l = loss(logits, y)
     print(l)  # tensor(0.9874)
 

@@ -21,9 +21,9 @@ def compute_gradient(w1, w2):
 
 
 def gradient_descent():
-    w1, w2 = -2, 3
-    jump_points = [[w1, w2]]
-    costs = [cost_function(w1, w2)]
+    w1, w2 = -2, 3 # 初始点
+    jump_points = [[w1, w2]] # 记录跳点的集合
+    costs = [cost_function(w1, w2)] # 记录每次迭代后代价函数的取值，目标是最小化这个代价函数
     step = 0.1
     print("P:({},{})".format(w1, w2), end=' ')
     for i in range(20):

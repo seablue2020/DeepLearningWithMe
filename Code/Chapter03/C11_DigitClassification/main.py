@@ -16,6 +16,9 @@ import matplotlib.pyplot as plt
 def load_dataset():
     data = MNIST(root='~/Datasets/MNIST', train=True, download=True,
                  transform=transforms.ToTensor())
+    # ToTenser()将原始图片由[0,255]的整数值转换为[0.0,1.0]的浮点数值
+    # 目的是为了后续的归一化处理以及神经网络的训练
+    # shape: [1,28,28]，1表示单通道灰度图
     return data
 
 
@@ -23,16 +26,16 @@ def visualization_loss(losses):
     plt.plot(range(len(losses)), losses)
     plt.xlabel('迭代次数', fontsize=15)
     plt.ylabel('损失值', fontsize=15)
-    plt.rcParams['font.sans-serif'] = ['Arial Unicode MS']
+    plt.rcParams['font.sans-serif'] = ['SimHei']
     # plt.ylim(-.05, 0.5)
     plt.tight_layout()
     plt.show()
 
 
 def train(data):
-    epochs = 2
-    lr = 0.03
-    batch_size = 128
+    epochs = 2  # 训练轮数
+    lr = 0.03   # 学习率
+    batch_size = 128  # 批次大小
     input_node = 28 * 28
     output_node = 10
     losses = []

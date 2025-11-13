@@ -6,7 +6,12 @@
 知 乎: @月来客栈 https://www.zhihu.com/people/the_lastest
 """
 import numpy as np
+import matplotlib
 import matplotlib.pyplot as plt
+
+# 配置中文字体，解决显示问题
+matplotlib.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'SimSun']
+matplotlib.rcParams['axes.unicode_minus'] = False
 
 
 def make_trapezoid_data():
@@ -15,7 +20,8 @@ def make_trapezoid_data():
     x2 = np.random.uniform(0.5, 1.5, [50, 1])
     x = np.hstack((x1, x2))
     # 在这里我们便得到了一个50行2列的样本数据，其中第一列为上底，第二列为下底
-    y = 0.5 * (x1 + x2) * x1
+    # 上底 = 高
+    y = 0.5 * (x1 + x2) * x1 # 计算面积
     return x, y
 
 

@@ -25,12 +25,14 @@ def DataLoader1():
 
 def DataLoader2():
     x = torch.tensor(np.random.random([100, 3, 16, 16]))
+    # 生成100个样本，每个样本是3通道16x16的图像
     y = torch.tensor(np.random.randint(0, 10, 100))
+    # 生成100个样本对应的标签，标签值在0-9之间
     dataset = TensorDataset(x, y)
     data_iter = DataLoader(dataset, batch_size=32)
     for (x, y) in data_iter:
         print(x.shape, y.shape)
-        break
+        # break
 
 
 if __name__ == '__main__':
