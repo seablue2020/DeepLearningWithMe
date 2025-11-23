@@ -15,7 +15,7 @@ inputs = torch.tensor([0, 2, 0, 1, 0, 0, 2, 0, 1, 1, 2, 1,
                        0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0, 0,
                        1, 1, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1,
                        1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0]).reshape([1, 3, 5, 5])
-
+# batch_size = 1, C = 3, H = 5, W = 5
 filters = torch.tensor([2, 0, 0, 1, 0, 1, 0, 3, 0, 1, 0, 1, 0, 0, 0, 1, 1,
                         0, 0, 0, 1, 1, 1, 1, 1, 1, 0,
                         0, 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1, 0, 1,
@@ -30,3 +30,6 @@ print("输入数据的形状为:\n", inputs.shape)
 print("卷积核的形状：[filter_nums/output_channels,input_channels,high,width]  ==>\n", filters.shape)
 print("卷积后的结果:\n", result)
 print("结果的形状:\n", result.shape)
+
+
+#[out_channels, in_channels, kernel_h, kernel_w]

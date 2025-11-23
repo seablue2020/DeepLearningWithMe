@@ -40,8 +40,14 @@ def train(data):
     output_node = 10
     losses = []
     data_iter = DataLoader(data, batch_size=batch_size, shuffle=True)
+    # DataLoader用于将数据集进行分批处理，这里设置每个批次包含128个样本，并且在每个epoch开始时打乱数据顺序
+    # 分批处理的意思是为了实现小批量梯度下降， 即batch gradient descent
+    # DataLoader的第一个参数可以是Dataset类型的数据集
+    # 这里的data是用MNIST类加载的训练数据集，属于Dataset类型
     net = nn.Sequential(nn.Flatten(), nn.Linear(input_node, output_node))
+    # nn.Flatten()将输入的1x28x28的图像展平为784维的向量
     loss = nn.CrossEntropyLoss()  # 定义损失函数
+    # 默认是reduction = 'mean'，即返回所有样本损失的平均值
     optimizer = torch.optim.SGD(net.parameters(), lr=lr)  # 定义优化器
     for epoch in range(epochs):
         for i, (x, y) in enumerate(data_iter):
@@ -59,5 +65,6 @@ def train(data):
 
 if __name__ == '__main__':
     data = load_dataset()
+    print(len(data))
     losses = train(data)
     visualization_loss(losses)

@@ -41,6 +41,8 @@ def get_model(input_node=28 * 28,
               output_node=10,
               p=0.5):
     net = nn.Sequential(nn.Flatten())
+    # 根据输入的超参数(hidden_layers)来确定隐藏层的数目
+    # Sequential 支持像 list 一样动态添加新的子模块：
     for i in range(hidden_layers):
         net.append(nn.Linear(input_node, hidden_nodes))
         net.append(nn.Dropout(p=p))
@@ -52,6 +54,7 @@ def get_model(input_node=28 * 28,
 def train(train_iter, val_iter, net, lr=0.03, weight_decay=0., epochs=1):
     loss = nn.CrossEntropyLoss()  # 定义损失函数
     optimizer = torch.optim.SGD(net.parameters(), lr=lr, weight_decay=weight_decay)  # 定义优化器
+    #weight_decay代表带了l2正则化
     for epoch in range(epochs):
         for i, (x, y) in enumerate(train_iter):
             logits = net(x)

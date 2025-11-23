@@ -13,13 +13,16 @@ import matplotlib.pyplot as plt
 
 def make_data():
     np.random.seed(1)
-    n_train, n_test, n_features = 80, 110, 150
+    # 构造数据集，特征数目远大于训练样本数量，容易导致过拟合
+    n_train, n_test, n_features = 80, 110, 150 
+    # 生成原始样本，并加入相应的噪声
     w, b = np.random.randn(n_features, 1) * 0.01, 0.01
     x = np.random.normal(size=(n_train + n_test, n_features))
     y = np.matmul(x, w) + b
     y += np.random.normal(scale=0.3, size=y.shape)
     x = torch.tensor(x, dtype=torch.float32)
     y = torch.tensor(y, dtype=torch.float32)
+    # 划分数据集并返回
     x_train, x_test = x[:n_train, :], x[n_train:, :]
     y_train, y_test = y[:n_train, :], y[n_train:, :]
     return x_train, x_test, y_train, y_test
